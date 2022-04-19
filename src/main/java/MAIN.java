@@ -1,2 +1,5 @@
-package PACKAGE_NAME;public class MAIN {
+public class MAIN {
+    public static void main(String[] args) {
+        System.out.println("This is a Java Tutorial.");
+    }
 }
