@@ -1,54 +1,52 @@
 import java.sql.SQLOutput;
 import java.text.NumberFormat;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
 
-public class Main  {
+public class Main {
+
+    static int countLast(final String a) {
+        int len = 0;
+        String x = a.trim();
+        for( int i = 0;
+        i < x.length();
+        i++){
+            if (x.charAt(i) == ' ')
+                len = 0;
+            else len++;
+        }
+        return len;
+    }
+    static int countWords(String input) {
+        if (input == null)
+            return 0;
+        String[] words = input.split("\\s+");
+        return words.length;
+    }
+    static int countThe(String str, String word){
+        String a[] = str.split(" ");
+        int count = 0;
+        for (int i=0; i < a.length; i++){
+            if (word.equals(a[i]))
+                count++;
+        }
+        return count;
+    }
     public static void main(String[] args) {
-        final byte MONTHS_IN_YEAR = 12;
-        final byte PERCENT = 100;
-
-        int principal = 0;
-        float monthlyInterest = 0;
-        int numberOfPayments = 0;
 
         Scanner scanner = new Scanner(System.in);
+        var word = "the";
+        String inputStr = scanner.nextLine().toLowerCase();
+        System.out.println("Total THE count is: " + countThe(inputStr, word));
+        System.out.println("Total WORD count is: " + countWords(inputStr));
+        System.out.println("Total LETTER COUNT OF LAST WORD is: " + countLast(inputStr));
 
-        while (true) {
-            System.out.print("Principal: ");
-            principal = scanner.nextInt();
-            if (principal >= 1000 && principal <= 1_000_000) {
-                break;
-            }
-            System.out.println("Enter a value between 1000 and 1000000");
         }
-        while (true) {
-            System.out.println("Annual interest Rate");
-            float annualInterest = scanner.nextFloat();
-            if (annualInterest >= 1 && annualInterest <= 30) {
-                monthlyInterest = annualInterest / PERCENT / MONTHS_IN_YEAR;
-                break;
-            }
-            System.out.println("Enter a value between 1 and 30.");
-        }
-        while (true) {
-        System.out.println("Period (Years): ");
-        byte years = scanner.nextByte();
-        if (years >= 1 && years <= 30) {
-            numberOfPayments = years * MONTHS_IN_YEAR;
-            break;
-        }
-        System.out.println("Enter a value between 1 and 30.");
+
     }
-        double mortgage = principal
-                * (monthlyInterest * Math.pow(1 + monthlyInterest, numberOfPayments) -1)
-                / (Math.pow(1 + monthlyInterest, numberOfPayments) -1);
 
-        String mortgageFormatted = NumberFormat.getCurrencyInstance().format(mortgage);
-        System.out.println("Mortgage: " + mortgageFormatted);
-        }
-        }
+
+
+
+
 
 
