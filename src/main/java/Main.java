@@ -3,46 +3,42 @@ import java.text.NumberFormat;
 import java.util.*;
 
 public class Main {
+    static final int MAX_CHAR = 256;
+        static void getOccurringChar(String inputString) {
 
-    static int countLast(final String a) {
-        int len = 0;
-        String x = a.trim();
-        for( int i = 0;
-        i < x.length();
-        i++){
-            if (x.charAt(i) == ' ')
-                len = 0;
-            else len++;
-        }
-        return len;
-    }
-    static int countWords(String input) {
-        if (input == null)
-            return 0;
-        String[] words = input.split("\\s+");
-        return words.length;
-    }
-    static int countThe(String str, String word){
-        String a[] = str.split(" ");
-        int count = 0;
-        for (int i=0; i < a.length; i++){
-            if (word.equals(a[i]))
-                count++;
-        }
-        return count;
-    }
+            int count[] = new int[MAX_CHAR];
+            int len = inputString.length();
+
+            for (int i = 0; i < len; i++)
+                count[inputString.charAt(i)]++;
+
+            char ch[] = new char[inputString.length()];
+            for (int i= 0; i < len; i++) {
+                ch[i] = inputString.charAt(i);
+                int find = 0;
+                for (int j = 0; j <= i; j++) {
+                    if (inputString.charAt(i) == ch[j])
+                        find++;
+                    }
+
+                if (find == 1)
+                    System.out.println("Number of Occurrence of " + inputString.charAt(i) + " is: " + count[inputString.charAt(i)]);
+                }
+            }
+
+
     public static void main(String[] args) {
-
+        System.out.println("Enter sentence: ");
         Scanner scanner = new Scanner(System.in);
-        var word = "the";
-        String inputStr = scanner.nextLine().toLowerCase();
-        System.out.println("Total THE count is: " + countThe(inputStr, word));
-        System.out.println("Total WORD count is: " + countWords(inputStr));
-        System.out.println("Total LETTER COUNT OF LAST WORD is: " + countLast(inputStr));
+        var inputString = scanner.nextLine().toLowerCase();
+        StringBuilder str = new StringBuilder(inputString);
+        StringBuilder revStr = str.reverse();
 
-        }
+ //     System.out.println("Reverse String: " + revStr.toString());
+        getOccurringChar(inputString);
 
     }
+}
 
 
 
